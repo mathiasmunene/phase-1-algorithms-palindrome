@@ -1,25 +1,55 @@
 function isPalindrome(word) {
-  // Write your algorithm here
+  // Initialize two pointers
+  let left = 0;
+  let right = word.length - 1;
+
+  // Compare characters moving towards the center
+  while (left < right) {
+    if (word[left] !== word[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
 }
 
 /* 
-  Add your pseudocode here
+  Pseudocode:
+  1. Set left pointer at start of word (index 0)
+  2. Set right pointer at end of word (last index)
+  3. While left pointer is before right pointer:
+     a. If characters at pointers don't match, return false
+     b. Move left pointer right by 1
+     c. Move right pointer left by 1
+  4. If loop completes without mismatches, return true
 */
 
 /*
-  Add written explanation of your solution here
+  Explanation:
+  This solution uses a two-pointer approach to check for palindromes efficiently.
+  We compare characters from both ends moving towards the center:
+  - If any pair doesn't match, it's not a palindrome
+  - If all pairs match until pointers meet/cross, it is a palindrome
+  This approach has O(n) time complexity (where n is word length) and O(1) space complexity.
 */
 
-// You can run `node index.js` to view these console logs
+// Custom test cases
 if (require.main === module) {
-  // add your own custom tests in here
   console.log("Expecting: true");
-  console.log("=>", isPalindrome("racecar"));
-
-  console.log("");
+  console.log("=>", isPalindrome("racecar")); // true
 
   console.log("Expecting: false");
-  console.log("=>", isPalindrome("robot"));
+  console.log("=>", isPalindrome("robot")); // false
+
+  console.log("Expecting: true");
+  console.log("=>", isPalindrome("a")); // single letter
+
+  console.log("Expecting: true");
+  console.log("=>", isPalindrome("")); // empty string
+
+  console.log("Expecting: false");
+  console.log("=>", isPalindrome("ab")); // even length non-palindrome
 }
 
 module.exports = isPalindrome;
